@@ -75,6 +75,7 @@ void myturn(int cnt) {
 	if (cnt == 1) {
 		x[0] = 9;
 		y[0] = 9;
+		domymove(x, y, cnt);
 	}
 	else {
 		for (int t = 0; t < 2; t++) {
@@ -98,14 +99,15 @@ void myturn(int cnt) {
 			y[t] = candidates_queue.top().y;
 			board[x[t]][y[t]] = 1;
 		}
+		board[x[0]][y[0]] = 0;
+		board[x[1]][y[1]] = 0;
+		domymove(x, y, cnt);
 	}
 	// 이 부분에서 자신이 놓을 돌을 출력하십시오.
 	// 필수 함수 : domymove(x배열,y배열,배열크기)
 	// 여기서 배열크기(cnt)는 myturn()의 파라미터 cnt를 그대로 넣어야합니다.
 	
-	board[x[0]][y[0]] = 0;
-	board[x[1]][y[1]] = 0;
-	domymove(x, y, cnt);
+	
 }
 
 bool isInBoard(int x, int y) {
