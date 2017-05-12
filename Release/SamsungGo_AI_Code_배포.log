@@ -1,0 +1,21 @@
+﻿Build started 5/12/2017 오전 11:36:02.
+     1>Project "C:\Users\violet716\Documents\GitHub\SDS-project\SamsungGo_AI_Code_배포\SamsungGo_AI_Code_배포.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\\" /AI"C:\Program Files (x86)\Windows Kits\8.1\References\CommonConfiguration\Neutral" /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\Facades\\" /Zi /clr /nologo /W3 /WX- /O2 /Oy- /D WIN32 /D NDEBUG /D _UNICODE /D UNICODE /EHa /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /TP /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\mscorlib.dll" /analyze- /errorReport:prompt /clr:nostdlib Connect6Algo.cpp
+         Connect6Algo.cpp
+     1>c:\users\violet716\documents\github\sds-project\samsunggo_ai_code_배포\connect6algo.cpp(37): warning C4793: 'setLine' : function compiled as native :
+         	varargs not supported under /clr
+     1>c:\users\violet716\documents\github\sds-project\samsunggo_ai_code_배포\connect6algo.cpp(40): warning C4793: 'setLine' : function compiled as native :
+         	Found an intrinsic not supported in managed code
+     1>c:\users\violet716\documents\github\sds-project\samsunggo_ai_code_배포\connect6algo.cpp(44): warning C4793: 'setLine' : function compiled as native :
+         	Found an intrinsic not supported in managed code
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\violet716\Documents\GitHub\SDS-project\Release\SamsungGo_AI_Code_배포.exe" /INCREMENTAL:NO /NOLOGO /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\violet716\Documents\GitHub\SDS-project\Release\SamsungGo_AI_Code_배포.pdb" /TLBID:1 /DYNAMICBASE /FIXED:NO /NXCOMPAT /MACHINE:X86 /SAFESEH Release\AI_Algorithm_Code.obj
+         Release\Connect6Algo.obj
+         "Release\.NETFramework,Version=v4.5.AssemblyAttributes.obj"
+         SamsungGo_AI_Code_배포.vcxproj -> C:\Users\violet716\Documents\GitHub\SDS-project\Release\SamsungGo_AI_Code_배포.exe
+     1>Done Building Project "C:\Users\violet716\Documents\GitHub\SDS-project\SamsungGo_AI_Code_배포\SamsungGo_AI_Code_배포.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:01.12
