@@ -55,10 +55,10 @@ const int dx[4][2][5] = {
 };
 int a;
 const int dy[4][2][5] = {
-	{ { 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0 } },
-	{ { -1, -2, -3, -4, -5 }, { 1, 2, 3, 4, 5 } },
-	{ { -1, -2, -3, -4, -5 }, { 1, 2, 3, 4, 5 } },
-	{ { 1, 2, 3, 4, 5 }, { -1, -2, -3, -4, -5 } }
+	{ { 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0 } },// H
+	{ { -1, -2, -3, -4, -5 }, { 1, 2, 3, 4, 5 } }, // V
+	{ { -1, -2, -3, -4, -5 }, { 1, 2, 3, 4, 5 } }, // D t-b
+	{ { 1, 2, 3, 4, 5 }, { -1, -2, -3, -4, -5 } } // D b-t
 };
 
 struct candidates {
@@ -73,8 +73,30 @@ bool operator<(candidates t, candidates u) {
 void myturn(int cnt) {
 	int x[2], y[2];
 	if (cnt == 1) {
-		x[0] = 9;
-		y[0] = 9;
+		if (isFree(9, 9)) {
+			x[0] = 9;
+			y[0] = 9;
+		}
+		else {
+			std::priority_queue<candidates> candidates_queue;
+			for (int i = 0; i < 19; i++) {
+				for (int j = 0; j < 19; j++) {
+					if (isFree(j, i)) {
+						double E = evaluation(j, i);
+						int OpStones = howManyOpStonesAround(j, i);
+						E = E * dweight[OpStones];
+						candidates c;
+						c.E = E;
+						c.x = j;
+						c.y = i;
+						candidates_queue.push(c);
+					}
+				}
+			}
+
+			x[0] = candidates_queue.top().x;
+			y[0] = candidates_queue.top().y;
+		}
 		domymove(x, y, cnt);
 	}
 	else {
