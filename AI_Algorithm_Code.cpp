@@ -38,6 +38,8 @@ int showBoard(int x, int y) : [x, y] 좌표에 무슨 돌이 존재하는지 보여주는 함수 (
 #include <time.h>
 #include "Connect6Algo.h"
 
+#include <iostream>
+#include <limits>
 #include <queue>
 // "샘플코드[C]"  -> 자신의 팀명 (수정)
 // "AI부서[C]"  -> 자신의 소속 (수정)
@@ -45,7 +47,7 @@ int showBoard(int x, int y) : [x, y] 좌표에 무슨 돌이 존재하는지 보여주는 함수 (
 char info[] = { "TeamName:샘플코드[C],Department:AI부서[C]" };
 
 const double dweight[4] = { 1.0, 1.00000181862, 1.00000363725, 1.00000726562 };
-const double weight[5] = { 4096, 2048, 1024, 512, 256 };
+const long long weight[5] = { 4096, 2048, 1024, 512, 256 };
 
 const int dx[4][2][5] = {
 	{ { -1, -2, -3, -4, -5 }, { 1, 2, 3, 4, 5 } }, // Horizontal
@@ -62,7 +64,7 @@ const int dy[4][2][5] = {
 };
 
 struct candidates {
-	double E;
+	long long E;
 	int x, y;
 };
 
@@ -82,7 +84,7 @@ void myturn(int cnt) {
 			for (int i = 0; i < 19; i++) {
 				for (int j = 0; j < 19; j++) {
 					if (isFree(j, i)) {
-						double E = evaluation(j, i);
+						long long E = evaluation(j, i);
 						int OpStones = howManyOpStonesAround(j, i);
 						E = E * dweight[OpStones];
 						candidates c;
@@ -105,7 +107,7 @@ void myturn(int cnt) {
 			for (int i = 0; i < 19; i++) {
 				for (int j = 0; j < 19; j++) {
 					if (isFree(j, i)) {
-						double E = evaluation(j, i);
+						long long E = evaluation(j, i);
 						int OpStones = howManyOpStonesAround(j, i);
 						E = E * dweight[OpStones];
 						candidates c;
@@ -136,7 +138,7 @@ bool isInBoard(int x, int y) {
 	return (x >= 0 && x < 19 && y >= 0 && y < 19);
 }
 
-double evaluation(int x, int y) {
+long long evaluation(int x, int y) {
 	if (!isFree(x, y)) return -1;
 	double E = 0, Ed = 1;
 	int boardState;
@@ -152,6 +154,7 @@ double evaluation(int x, int y) {
 				else if (boardState == 2) {
 					Ed = Ed * weight[k];
 				}
+
 			}
 		}
 		E = E + Ed;
