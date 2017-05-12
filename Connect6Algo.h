@@ -19,7 +19,7 @@ extern void opmove(int x[], int y[], int cnt = 2);
 extern void block(int, int);
 extern int setLine(char *fmt, ...);
 extern void domymove(int x[], int y[], int cnt = 2);
-extern long long evaluation(int x, int y);
+extern double evaluation(int x, int y);
 extern int howManyOpStonesAround(int x, int y);
 void myturn(int cnt = 2);
 char info[];

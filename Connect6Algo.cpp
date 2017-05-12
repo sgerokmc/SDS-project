@@ -153,7 +153,7 @@ int main() {
 		getLine();
 		doCommand();
 	}
-
+	
 	return 0;
 }
 

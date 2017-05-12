@@ -64,7 +64,7 @@ const int dy[4][2][5] = {
 };
 
 struct candidates {
-	long long E;
+	double E;
 	int x, y;
 };
 
@@ -84,7 +84,7 @@ void myturn(int cnt) {
 			for (int i = 0; i < 19; i++) {
 				for (int j = 0; j < 19; j++) {
 					if (isFree(j, i)) {
-						long long E = evaluation(j, i);
+						double E = evaluation(j, i);
 						int OpStones = howManyOpStonesAround(j, i);
 						E = E * dweight[OpStones];
 						candidates c;
@@ -107,7 +107,7 @@ void myturn(int cnt) {
 			for (int i = 0; i < 19; i++) {
 				for (int j = 0; j < 19; j++) {
 					if (isFree(j, i)) {
-						long long E = evaluation(j, i);
+						double E = evaluation(j, i);
 						int OpStones = howManyOpStonesAround(j, i);
 						E = E * dweight[OpStones];
 						candidates c;
@@ -138,17 +138,19 @@ bool isInBoard(int x, int y) {
 	return (x >= 0 && x < 19 && y >= 0 && y < 19);
 }
 
-long long evaluation(int x, int y) {
+double evaluation(int x, int y) {
 	if (!isFree(x, y)) return -1;
 	double E = 0, Ed = 1;
 	int boardState;
 	for (int i = 0; i < 4; i++) {
 		for (int j = 0; j < 2; j++) {
 			for (int k = 0; k < 5; k++) {
-				boardState = showBoard(x+dx[i][j][k], y+dy[i][j][k]);
+				int nx = x + dx[i][j][k];
+				int ny = y + dy[i][j][k];
+				boardState = showBoard(nx, ny);
 				if (boardState == 1 || boardState == 3) {
 					break;
-				} else if (isFree(x+dx[i][j][k], y+dy[i][j][k])) {
+				} else if (isFree(nx, ny)) {
 					Ed = Ed * 2;
 				}
 				else if (boardState == 2) {
@@ -182,5 +184,5 @@ int howManyOpStonesAround(int x, int y) {
 		finished = false;
 	}
 	
-	return result;
+	return (result < 0? 0 : result);
 }
