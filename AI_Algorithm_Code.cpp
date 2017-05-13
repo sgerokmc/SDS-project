@@ -202,18 +202,18 @@ bool Attack(int x[2], int y[2], int cnt) {
 						std::vector<candidates> v;
 						finished = false;
 						numOfStones = 1;
-						for (int k = 0; k < 6; k++) {
+						for (int k = 0; k < 5; k++) {
 							nx = xx + dx[i][j][k];
 							ny = yy + dy[i][j][k];
 							boardState = showBoard(nx, ny);
 
-							if (k != 5 && boardState == 0 && isFree(nx, ny)) {
+							if (boardState == 0 && isFree(nx, ny)) {
 								candidates c;
 								c.x = nx;
 								c.y = ny;
 								v.push_back(c);
 							}
-							else if (k != 5 && (boardState == 2 || boardState == 3)) {
+							else if (boardState == 2 || boardState == 3) {
 								finished = true;
 								break;
 							}
@@ -221,8 +221,10 @@ bool Attack(int x[2], int y[2], int cnt) {
 								numOfStones++;
 							}
 						}
+						nx = xx + dx[i][j][5];
+						ny = yy + dy[i][j][5];
 						if (finished) continue;
-						if (numOfStones == 6) continue;
+						if (showBoard(nx,ny) == 1) continue;
 						else if (numOfStones == 5) {
 							x[0] = v.back().x;
 							y[0] = v.back().y;
