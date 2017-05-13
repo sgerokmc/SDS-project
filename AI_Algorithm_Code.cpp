@@ -44,7 +44,7 @@ int showBoard(int x, int y) : [x, y] 좌표에 무슨 돌이 존재하는지 보여주는 함수 (
 // "샘플코드[C]"  -> 자신의 팀명 (수정)
 // "AI부서[C]"  -> 자신의 소속 (수정)
 // 제출시 실행파일은 반드시 팀명으로 제출!
-char info[] = { "TeamName:샘플코드[C],Department:AI부서[C]" };
+char info[] = { "TeamName:이겨보시조,Department:성균관대학교" };
 
 const double dweight[4] = { 1.0, 1.00000181862, 1.00000363725, 1.00000726562 };
 const long long weight[5] = { 4096, 2048, 1024, 512, 256 };
@@ -223,12 +223,23 @@ bool Attack(int x[2], int y[2], int cnt) {
 						}
 						nx = xx + dx[i][j][5];
 						ny = yy + dy[i][j][5];
+						if (showBoard(nx, ny) == 1) continue;
+						nx = xx + dx[i][(j == 0 ? 1 : 0)][0];
+						ny = yy + dy[i][(j == 0 ? 1 : 0)][0];
+						if (showBoard(nx, ny) == 1) continue;
 						if (finished) continue;
-						if (showBoard(nx,ny) == 1) continue;
 						else if (numOfStones == 5) {
 							x[0] = v.back().x;
 							y[0] = v.back().y;
-							return true;
+							for (int p = 0; p < 19; p++) {
+								for (int q = 0; q < 19; q++) {
+									if (isFree(p, q)) {
+										x[1] = p;
+										y[1] = q;
+										return true;
+									}
+								}
+							}
 						}
 						else if (numOfStones == 4 && cnt == 2) {
 							x[0] = v[0].x; y[0] = v[0].y;
