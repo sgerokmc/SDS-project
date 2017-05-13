@@ -21,5 +21,6 @@ extern int setLine(char *fmt, ...);
 extern void domymove(int x[], int y[], int cnt = 2);
 extern double evaluation(int x, int y);
 extern int howManyOpStonesAround(int x, int y);
+extern bool Attack(int x[2], int y[2], int cnt);
 void myturn(int cnt = 2);
 char info[];

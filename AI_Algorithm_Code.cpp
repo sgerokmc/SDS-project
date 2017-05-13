@@ -49,18 +49,18 @@ char info[] = { "TeamName:샘플코드[C],Department:AI부서[C]" };
 const double dweight[4] = { 1.0, 1.00000181862, 1.00000363725, 1.00000726562 };
 const long long weight[5] = { 4096, 2048, 1024, 512, 256 };
 
-const int dx[4][2][5] = {
-	{ { -1, -2, -3, -4, -5 }, { 1, 2, 3, 4, 5 } }, // Horizontal
-	{ { 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0 } }, // Vertical
-	{ { -1, -2, -3, -4, -5 }, { 1, 2, 3, 4, 5 } }, // Diagonal topleft-bottomright
-	{ { -1, -2, -3, -4, -5 }, { 1, 2, 3, 4, 5 } } //  Diagonal bottomleft-topright
+const int dx[4][2][6] = {
+	{ { -1, -2, -3, -4, -5, -6 }, { 1, 2, 3, 4, 5, 6} }, // Horizontal
+	{ { 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0 } }, // Vertical
+	{ { -1, -2, -3, -4, -5, -6 }, { 1, 2, 3, 4, 5, 6 } }, // Diagonal topleft-bottomright
+	{ { -1, -2, -3, -4, -5, -6 }, { 1, 2, 3, 4, 5, 6 } } //  Diagonal bottomleft-topright
 };
 int a;
-const int dy[4][2][5] = {
-	{ { 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0 } },// H
-	{ { -1, -2, -3, -4, -5 }, { 1, 2, 3, 4, 5 } }, // V
-	{ { -1, -2, -3, -4, -5 }, { 1, 2, 3, 4, 5 } }, // D t-b
-	{ { 1, 2, 3, 4, 5 }, { -1, -2, -3, -4, -5 } } // D b-t
+const int dy[4][2][6] = {
+	{ { 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0 } },// H
+	{ { -1, -2, -3, -4, -5, -6 }, { 1, 2, 3, 4, 5, 6 } }, // V
+	{ { -1, -2, -3, -4, -5, -6 }, { 1, 2, 3, 4, 5, 6 } }, // D t-b
+	{ { 1, 2, 3, 4, 5, 6 }, { -1, -2, -3, -4, -5, -6 } } // D b-t
 };
 
 struct candidates {
@@ -74,64 +74,65 @@ bool operator<(candidates t, candidates u) {
 
 void myturn(int cnt) {
 	int x[2], y[2];
-	if (cnt == 1) {
-		if (isFree(9, 9)) {
-			x[0] = 9;
-			y[0] = 9;
+
+	if (!Attack(x, y, cnt)) {
+		if (cnt == 1) {
+			if (isFree(9, 9)) {
+				x[0] = 9;
+				y[0] = 9;
+			}
+			else {
+				std::priority_queue<candidates> candidates_queue;
+				for (int i = 0; i < 19; i++) {
+					for (int j = 0; j < 19; j++) {
+						if (isFree(j, i)) {
+							double E = evaluation(j, i);
+							int OpStones = howManyOpStonesAround(j, i);
+							E = E * dweight[OpStones];
+							candidates c;
+							c.E = E;
+							c.x = j;
+							c.y = i;
+							candidates_queue.push(c);
+						}
+					}
+				}
+
+				x[0] = candidates_queue.top().x;
+				y[0] = candidates_queue.top().y;
+			}
+			domymove(x, y, cnt);
 		}
 		else {
-			std::priority_queue<candidates> candidates_queue;
-			for (int i = 0; i < 19; i++) {
-				for (int j = 0; j < 19; j++) {
-					if (isFree(j, i)) {
-						double E = evaluation(j, i);
-						int OpStones = howManyOpStonesAround(j, i);
-						E = E * dweight[OpStones];
-						candidates c;
-						c.E = E;
-						c.x = j;
-						c.y = i;
-						candidates_queue.push(c);
+			for (int t = 0; t < 2; t++) {
+				std::priority_queue<candidates> candidates_queue;
+				for (int i = 0; i < 19; i++) {
+					for (int j = 0; j < 19; j++) {
+						if (isFree(j, i)) {
+							double E = evaluation(j, i);
+							int OpStones = howManyOpStonesAround(j, i);
+							E = E * dweight[OpStones];
+							candidates c;
+							c.E = E;
+							c.x = j;
+							c.y = i;
+							candidates_queue.push(c);
+						}
 					}
 				}
-			}
 
-			x[0] = candidates_queue.top().x;
-			y[0] = candidates_queue.top().y;
+				x[t] = candidates_queue.top().x;
+				y[t] = candidates_queue.top().y;
+				board[x[t]][y[t]] = 1;
+			}
+			board[x[0]][y[0]] = 0;
+			board[x[1]][y[1]] = 0;
+			domymove(x, y, cnt);
 		}
-		domymove(x, y, cnt);
 	}
 	else {
-		for (int t = 0; t < 2; t++) {
-			std::priority_queue<candidates> candidates_queue;
-			for (int i = 0; i < 19; i++) {
-				for (int j = 0; j < 19; j++) {
-					if (isFree(j, i)) {
-						double E = evaluation(j, i);
-						int OpStones = howManyOpStonesAround(j, i);
-						E = E * dweight[OpStones];
-						candidates c;
-						c.E = E;
-						c.x = j;
-						c.y = i;
-						candidates_queue.push(c);
-					}
-				}
-			}
-
-			x[t] = candidates_queue.top().x;
-			y[t] = candidates_queue.top().y;
-			board[x[t]][y[t]] = 1;
-		}
-		board[x[0]][y[0]] = 0;
-		board[x[1]][y[1]] = 0;
 		domymove(x, y, cnt);
 	}
-	// 이 부분에서 자신이 놓을 돌을 출력하십시오.
-	// 필수 함수 : domymove(x배열,y배열,배열크기)
-	// 여기서 배열크기(cnt)는 myturn()의 파라미터 cnt를 그대로 넣어야합니다.
-	
-	
 }
 
 bool isInBoard(int x, int y) {
@@ -185,4 +186,58 @@ int howManyOpStonesAround(int x, int y) {
 	}
 	
 	return (result < 0? 0 : result);
+}
+
+
+bool Attack(int x[2], int y[2], int cnt) {
+	int numOfStones;
+	int boardState;
+	int nx, ny;
+	bool finished = false;
+	for (int yy = 0; yy < 19; yy++) {
+		for (int xx = 0; xx < 19; xx++) {
+			if (showBoard(xx,yy) == 1) {
+				for (int i = 0; i < 4; i++) {
+					for (int j = 0; j < 2; j++) {
+						std::vector<candidates> v;
+						finished = false;
+						numOfStones = 1;
+						for (int k = 0; k < 6; k++) {
+							nx = xx + dx[i][j][k];
+							ny = yy + dy[i][j][k];
+							boardState = showBoard(nx, ny);
+
+							if (k != 5 && boardState == 0 && isFree(nx, ny)) {
+								candidates c;
+								c.x = nx;
+								c.y = ny;
+								v.push_back(c);
+							}
+							else if (k != 5 && (boardState == 2 || boardState == 3)) {
+								finished = true;
+								break;
+							}
+							else if (boardState == 1) {
+								numOfStones++;
+							}
+						}
+						if (finished) continue;
+						if (numOfStones == 6) continue;
+						else if (numOfStones == 5) {
+							x[0] = v.back().x;
+							y[0] = v.back().y;
+							return true;
+						}
+						else if (numOfStones == 4 && cnt == 2) {
+							x[0] = v[0].x; y[0] = v[0].y;
+							x[1] = v[1].x; y[1] = v[1].y;
+							return true;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	return false;
 }
