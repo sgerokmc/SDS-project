@@ -1,8 +1,16 @@
-﻿Build started 5/13/2017 오후 4:16:26.
+﻿Build started 5/15/2017 오후 3:22:42.
      1>Project "C:\Users\violet716\Desktop\SamsungGo_AI_Code_C_C++\SamsungGo_AI_Code_배포\SamsungGo_AI_Code_배포.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\\" /AI"C:\Program Files (x86)\Windows Kits\8.1\References\CommonConfiguration\Neutral" /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\Facades\\" /Zi /clr /nologo /W3 /WX- /O2 /Oy- /D WIN32 /D NDEBUG /D _UNICODE /D UNICODE /EHa /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /TP /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\mscorlib.dll" /analyze- /errorReport:prompt /clr:nostdlib AI_Algorithm_Code.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\\" /AI"C:\Program Files (x86)\Windows Kits\8.1\References\CommonConfiguration\Neutral" /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\Facades\\" /Zi /clr /nologo /W3 /WX- /O2 /Oy- /D WIN32 /D NDEBUG /D _UNICODE /D UNICODE /EHa /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /TP /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\mscorlib.dll" /analyze- /errorReport:prompt /clr:nostdlib AI_Algorithm_Code.cpp Connect6Algo.cpp
          AI_Algorithm_Code.cpp
+         Connect6Algo.cpp
+         Generating Code...
+     1>c:\users\violet716\desktop\samsunggo_ai_code_c_c++\samsunggo_ai_code_배포\connect6algo.cpp(36): warning C4793: 'setLine' : function compiled as native :
+         	varargs not supported under /clr
+     1>c:\users\violet716\desktop\samsunggo_ai_code_c_c++\samsunggo_ai_code_배포\connect6algo.cpp(39): warning C4793: 'setLine' : function compiled as native :
+         	Found an intrinsic not supported in managed code
+     1>c:\users\violet716\desktop\samsunggo_ai_code_c_c++\samsunggo_ai_code_배포\connect6algo.cpp(43): warning C4793: 'setLine' : function compiled as native :
+         	Found an intrinsic not supported in managed code
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\violet716\Desktop\SamsungGo_AI_Code_C_C++\Release\SamsungGo_AI_Code_배포.exe" /INCREMENTAL:NO /NOLOGO /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\violet716\Desktop\SamsungGo_AI_Code_C_C++\Release\SamsungGo_AI_Code_배포.pdb" /TLBID:1 /DYNAMICBASE /FIXED:NO /NXCOMPAT /MACHINE:X86 /SAFESEH Release\AI_Algorithm_Code.obj
          Release\Connect6Algo.obj
@@ -12,4 +20,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:02.07
+Time Elapsed 00:00:02.83

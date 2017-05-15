@@ -6,7 +6,6 @@
 extern int width, height;
 extern int terminateAI;
 extern int board[20][20];
-extern int lastMove[2][2];
 
 extern unsigned s_time;
 

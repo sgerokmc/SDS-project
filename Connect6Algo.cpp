@@ -19,7 +19,6 @@ static char cmd[256];
 static HANDLE event1, event2;
 #define BOARD_SIZE 20
 int board[BOARD_SIZE][BOARD_SIZE];
-int lastMove[2][2] = { -1, -1, -1, -1 };
 
 static void getLine() {
 	int c, bytes;
@@ -186,8 +185,6 @@ void opmove(int x[], int y[], int cnt) {
 	for (int i = 0; i < cnt; i++) {
 		if (isFree(x[i], y[i])) {
 			board[x[i]][y[i]] = 2;
-			lastMove[i][0] = x[i];
-			lastMove[i][1] = y[i];
 		}
 		else {
 			setLine("ERROR 이미 돌이 있는 위치입니다. OP[%d, %d]", x[i], y[i]);

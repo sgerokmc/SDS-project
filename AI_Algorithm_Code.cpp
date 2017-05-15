@@ -101,7 +101,6 @@ void myturn(int cnt) {
 				x[0] = candidates_queue.top().x;
 				y[0] = candidates_queue.top().y;
 			}
-			domymove(x, y, cnt);
 		}
 		else {
 			for (int t = 0; t < 2; t++) {
@@ -127,12 +126,10 @@ void myturn(int cnt) {
 			}
 			board[x[0]][y[0]] = 0;
 			board[x[1]][y[1]] = 0;
-			domymove(x, y, cnt);
+			
 		}
 	}
-	else {
-		domymove(x, y, cnt);
-	}
+	domymove(x, y, cnt);
 }
 
 bool isInBoard(int x, int y) {
